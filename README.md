@@ -1,13 +1,14 @@
 # Shop Project
 
-This is a React project built with **Vite**, a small demo online shop.  
-The site works locally with **JSON Server** to simulate a database, but on Netlify or other static hosts, the products will not be visible without an external API.
+This is a React + Vite eShop demo with a real backend built using Node.js, Express, Prisma, and MySQL.
+It allows dynamic product management, data fetching from a real database, and a smooth, modern user experience.
 
 ## Live Demo
 
-You can see the live site here (products will only show locally):
+You can see the live site here:
 
 [https://eshop-demo1.netlify.app/](https://eshop-demo1.netlify.app/)
+(Frontend only — API must be running locally or deployed separately.)
 
 
 <img width="1295" height="858" alt="image" src="https://github.com/user-attachments/assets/9231a1a5-ed3f-4c54-af8c-5817ea5cc74b" />
@@ -17,11 +18,17 @@ You can see the live site here (products will only show locally):
 
 ## Features
 
-- Display products from `db.json` (local only)
-- Uses **React Router** for navigation
-- Styled with **Styled Components**
-- Product filtering and sorting
-- Responsive design for desktop and mobile
+- Dynamic products loaded from a real MySQL database
+
+- Backend built with Node.js + Express + Prisma
+
+- Fully functional API endpoints for products
+
+- React Router for page navigation
+
+- Filtering & sorting options
+
+- Responsive design (desktop + mobile)
 
 ---
 
@@ -30,7 +37,7 @@ You can see the live site here (products will only show locally):
 1. Clone the project:
 
 ```bash
-git clone https://github.com/your-username/shop-project.git
+git clone https://github.com/carolina1pc/eshop2.0.git
 cd shop-project
 ```
 
@@ -41,36 +48,52 @@ npm install
 
 3. Install any additional packages if needed:
 ```bash
-npm install styled-components json-server react-router-dom
+npm install styled-components react-router-dom
 ```
 
-4. Start JSON Server to serve the local database:
-```bash
-npx json-server --watch db.json --port 5000
-npm run server
-```
-
-5. Install React Router DOM for navigation:
+4. Install React Router DOM for navigation:
 
 ```bash
 npm install react-router-dom
 ```
 
-On Netlify or any static host, products will not display, because db.json is not accessible as a server.
+5. Backend setup
+ Create a .env file in the backend folder:
+```bash
+DATABASE_URL="mysql://user:password@localhost:3306/eshop"
+```
 
-To see the data online, you need an external API (like JSONBin, Supabase, or Firebase) or Netlify Functions.
+Then run Prisma migrations:
+```bash
+npx prisma migrate dev
+```
+
+Start the backend server:
+```bash
+npm run server
+```
 
 ---
 
 ## Technologies Used
 
-React + Vite
+Frontend:
 
-Styled Components
+- React + Vite
 
-JSON Server (for local development)
+- Styled Components
 
-React Router
+- React Router DOM
+
+Backend:
+
+- Node.js + Express
+
+- Prisma ORM
+
+- MySQL Database
+
+- XAMPP
 
  ## Screenshots
 

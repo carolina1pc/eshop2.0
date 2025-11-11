@@ -7,7 +7,7 @@ It allows dynamic product management, data fetching from a real database, and a 
 
 You can see the live site here:
 
-[https://eshop-demo1.netlify.app/](https://eshop-demo1.netlify.app/)
+
 (Frontend only — API must be running locally or deployed separately.)
 
 

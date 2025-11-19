@@ -35,12 +35,12 @@ function SearchBox({ products }) {
     <form className="searchbox-container" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Caută produse..."
+        placeholder="Search products..."
         className="searchbox-input"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button className="searchbox-icon" type="submit" aria-label="Caută">
+      <button className="searchbox-icon" type="submit" aria-label="Search">
         <svg
           width="20"
           height="20"
@@ -80,7 +80,7 @@ function SearchBox({ products }) {
         <p>{product.name}</p>
         <p className="search-result-price">
           {intPart}
-          <span className="price-decimals">{decimalPart}</span> lei
+          <span className="price-decimals">{decimalPart}</span> RON
         </p>
       </div>
     </Link>

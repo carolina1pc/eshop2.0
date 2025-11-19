@@ -6,11 +6,13 @@ import "./ProductDetail.css";
 import styles from "./ProductDetail.module.css";
 
 export default function ProductDetail({ product, onEdit, onDelete, onAddToCart }) {
-  if (!product) return <p>Se încarcă produsul...</p>;
+  if (!product) return <p>Loading product...</p>;
 
   const price = product.price.toFixed(2);
   const [intPart, decimalPart] = price.split(".");
   const { addToCart } = useContext(CartContext);
+  const safeOnEdit = onEdit || (() => {});
+  const safeOnDelete = onDelete || (() => {});
 
   return (
     <div className="product-detail-container-horizontal">
@@ -25,13 +27,13 @@ export default function ProductDetail({ product, onEdit, onDelete, onAddToCart }
         <div className="product-actions">
           <span className="product-price">
             <span className="price-int">{intPart}</span>
-            <span className="product-price-decimals">{decimalPart} Lei</span>
+            <span className="product-price-decimals">{decimalPart} RON</span>
           </span>
 
           <div className="action-buttons">
-            <button className="btn-edit" onClick={onEdit}>Edit</button>
+            <button className="btn-edit" onClick={safeOnEdit}>Edit</button>
 
-            <button className="btn-delete" onClick={() => onDelete(product.id, product.name)}>Delete</button>
+            <button className="btn-delete" onClick={() => safeOnDelete(product.id, product.name)}>Delete</button>
             <button className={`btn-add-cart ${product.stock === 0 ? "disabled" : ""}`}
             onClick={() => addToCart(product)}
             disabled={product.stock === 0}>
@@ -45,13 +47,13 @@ export default function ProductDetail({ product, onEdit, onDelete, onAddToCart }
         </div>
 
         {product.stock === 0 && (
-          <p className="out-of-stock">Produsul nu este pe stoc</p>
+          <p className="out-of-stock">This product is out of stock</p>
           )}
 
       </div>
       </div>
       <div className="product-description-section">
-      <PrimaryTitle>Descriere</PrimaryTitle>
+      <PrimaryTitle>Description</PrimaryTitle>
       <p className="product-description">{product.description}</p>
       </div>
     </div>

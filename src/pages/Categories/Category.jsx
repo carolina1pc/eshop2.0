@@ -5,7 +5,7 @@ import Card from "../../components/Cards/Cards";
 
 const categoryMap = {
   "laptop+tablet+phone": ["laptop", "tablet", "phone"],
-  "gaming+accessories": ["consola", "accessories"],
+  "gaming+accessories": ["console", "accessories"],
   "pc+peripherals": ["pc", "peripherals", "components"]
 };
 
@@ -27,7 +27,7 @@ export default function Category() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Eroare la fetch:", err);
+        console.error("Fetch error:", err);
         setLoading(false);
       });
   }, [name]);
@@ -37,11 +37,11 @@ export default function Category() {
       <CategoryBar /> 
         <div className="cards">
           {loading ? (
-            <p style={{ color: "white" }}>Se încarcă produsele...</p>
+            <p style={{ color: "white" }}>Loading products...</p>
           ) : products.length > 0 ? (
             products.map((p) => <Card key={p.id} product={p} />)
           ) : (
-            <p style={{ color: "white" }}>Nu există produse în această categorie.</p>
+            <p style={{ color: "white" }}>No products in this category.</p>
           )}
         </div>
       </div>

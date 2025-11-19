@@ -23,14 +23,14 @@ function Contact() {
       });
 
       if (!response.ok) {
-        throw new Error("Eroare la trimiterea mesajului!");
+        throw new Error("Error sending message!");
       }
 
-      alert("Mesajul tău a fost trimis și salvat în DB!");
+      alert("Your message has been sent and saved in the DB!");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error(error);
-      alert("A apărut o problemă, încearcă din nou.");
+      alert("A problem occurred, please try again.");
     }
   };
 

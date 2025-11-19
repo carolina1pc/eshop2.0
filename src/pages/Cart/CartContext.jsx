@@ -17,7 +17,7 @@ export function CartProvider({ children }) {
             : item
         );
       } else {
-        alert("Nu mai avem suficiente produse pe stoc!");
+        alert("Not enough items in stock!");
         return prevCart;
       }
     }
@@ -25,7 +25,7 @@ export function CartProvider({ children }) {
     if (product.stock > 0) {
       return [...prevCart, { ...product, qty: 1 }];
     } else {
-      alert("Produsul nu mai este pe stoc!");
+      alert("This product is out of stock!");
       return prevCart;
     }
   });

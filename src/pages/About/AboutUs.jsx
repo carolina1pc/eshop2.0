@@ -5,30 +5,30 @@ function AboutUs() {
   return (
     <div className="about-page">
       <div className="about-header">
-        <h1>Despre eShop</h1>
+        <h1>About eShop</h1>
         <p>
-          La eShop ne dorim să oferim cele mai bune produse și o experiență de cumpărare simplă și rapidă.
+          At eShop we aim to offer great products and a simple, fast shopping experience.
         </p>
       </div>
 
       
         <div className="about-text">
-          <h2>Cine suntem?</h2>
+          <h2>Who are we?</h2>
           <p>
-            eShop este magazinul online unde găsești produse de calitate, la prețuri accesibile. Echipa noastră este pasionată de tehnologie și servicii pentru clienți.
+            eShop is an online store where you find quality products at fair prices. Our team is passionate about technology and customer service.
           </p>
 
-          <h2>Misiunea noastră</h2>
+          <h2>Our Mission</h2>
           <p>
-            Misiunea eShop este să aducem tehnologia mai aproape de tine și să facem cumpărăturile online mai ușoare și mai plăcute.
+            Our mission is to bring technology closer to you and make online shopping easier and more enjoyable.
           </p>
 
-          <h2>De ce să ne alegi?</h2>
+          <h2>Why choose us?</h2>
           <ul>
-            <li>Produse de calitate și verificate</li>
-            <li>Livrare rapidă și sigură</li>
-            <li>Suport clienți prietenos</li>
-            <li>Returnare ușoară și transparentă</li>
+            <li>Quality, verified products</li>
+            <li>Fast and reliable delivery</li>
+            <li>Friendly customer support</li>
+            <li>Easy and transparent returns</li>
           </ul>
       </div>
     </div>

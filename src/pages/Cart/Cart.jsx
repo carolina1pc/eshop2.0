@@ -7,13 +7,13 @@ import './Cart.css'
 function Cart() {
   const { cart, removeFromCart, updateQty, total, clearCart } = useContext(CartContext);
   const [formData, setFormData] = useState({
-    nume: '',
-    prenume: '',
-    telefon: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
     email: '',
-    judetul: '',
-    localitatea: '',
-    adresa: ''
+    country: '',
+    city: '',
+    address: ''
   });
 
   const [termsError, setTermsError] = useState("");
@@ -26,21 +26,27 @@ function Cart() {
   e.preventDefault();
 
   if (cart.length === 0) {
-    alert("Coșul este gol!");
+    alert("Your cart is empty!");
     return;
   }
 
   const termsCheckbox = e.target.querySelector('input[type="checkbox"]');
   if (!termsCheckbox.checked) {
-    setTermsError("Trebuie să accepți Termenii și condițiile!");
+    setTermsError("You must accept the Terms and Conditions!");
     return;
   }
 
   setTermsError("");
 
   const order = {
-    produse: cart,
-    dateClient: formData,
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    phone: formData.phone,
+    email: formData.email,
+    country: formData.country,
+    city: formData.city,
+    address: formData.address,
+    items: cart.map((item) => ({ productId: item.id, quantity: item.qty })),
     total,
   };
 
@@ -51,27 +57,10 @@ function Cart() {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Comanda a fost salvată:", data);
-
-      cart.forEach((item) => {
-        const newStock = item.stock - item.qty;
-
-        fetch(`http://localhost:3000/products/${item.id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ stock: newStock }),
-        })
-          .then((res) => res.json())
-          .then((updated) =>
-            console.log(`Stoc actualizat pt ${updated.name}: ${updated.stock}`)
-          )
-          .catch((err) => console.error("Eroare la update stoc:", err));
-      });
-
-      alert("Comanda trimisă cu succes!");
-
+      console.log("Order saved:", data);
+      alert("Order submitted successfully!");
       clearCart();
-    setFormData({ name: "", email: "", address: "" });
+      setFormData({ firstName: "", lastName: "", phone: "", email: "", country: "", city: "", address: "" });
     })
     .catch((err) => console.error(err));
 };
@@ -82,14 +71,14 @@ const [totalInt, totalDec] = totalPrice.split(".");
   return (
     <div className="cart-container">
       {cart.length === 0 ? (
-        <p>Coșul este gol</p>
+        <p>Your cart is empty</p>
       ) : (
         cart.map((item) => (
           <div className="cart-item" key={item.id}>
             <div className="item-info">
             <img src={item.image} alt={item.name} className="card-image-cart" />
             <span className="text-name-item">{item.name}</span>
-            <button className='btn-delete-cart' onClick={() => removeFromCart(item.id)}>Șterge</button>
+            <button className='btn-delete-cart' onClick={() => removeFromCart(item.id)}>Delete</button>
             </div>
             <div className="item-info">
             <div className="qty-control">
@@ -104,7 +93,7 @@ const [totalInt, totalDec] = totalPrice.split(".");
                 return (
                 <>
                 <span className="card-price">{intPart}</span>
-                <span className="price-decimals">{decimalPart} Lei</span>
+                <span className="price-decimals">{decimalPart} RON</span>
                 </>
                 );
                 })()}
@@ -115,21 +104,21 @@ const [totalInt, totalDec] = totalPrice.split(".");
       )}
 
       <p className="cart-total-text">Total: <span className="price-int">{totalInt}</span>
-  <span className="price-decimals">{totalDec} Lei</span></p>
+  <span className="price-decimals">{totalDec} RON</span></p>
 
       <form className="client-form" onSubmit={handleSubmit}>
-        <input className="client-input" name="nume" value={formData.nume || ""} onChange={handleChange} placeholder="Nume" required />
-        <input className="client-input" name="prenume" value={formData.prenume || ""} onChange={handleChange} placeholder="Prenume" required />
-        <input className="client-input" name="telefon" value={formData.telefon || ""} onChange={handleChange} placeholder="Telefon" required />
+        <input className="client-input" name="firstName" value={formData.firstName || ""} onChange={handleChange} placeholder="First name" required />
+        <input className="client-input" name="lastName" value={formData.lastName || ""} onChange={handleChange} placeholder="Last name" required />
+        <input className="client-input" name="phone" value={formData.phone || ""} onChange={handleChange} placeholder="Phone" required />
         <input className="client-input" name="email" value={formData.email || ""} onChange={handleChange} placeholder="Email" required />
-        <input className="client-input" name="localitatea" value={formData.localitatea || ""} onChange={handleChange} placeholder="Localitatea" required />
-        <input className="client-input" name="judetul" value={formData.judetul || ""} onChange={handleChange} placeholder="Judetul" required />
-        <input className="client-input" name="adresa" value={formData.adresa || ""} onChange={handleChange} placeholder="Adresa" required />
+        <input className="client-input" name="country" value={formData.country || ""} onChange={handleChange} placeholder="Country" required />
+        <input className="client-input" name="city" value={formData.city || ""} onChange={handleChange} placeholder="City" required />
+        <input className="client-input" name="address" value={formData.address || ""} onChange={handleChange} placeholder="Address" required />
         <label className="terms-checkbox">
-          <input type="checkbox" /><span className="custom-checkbox"></span>Accept 
-          <Link to="/terms" className="terms-link">Termenii și condițiile</Link></label>
+          <input type="checkbox" /><span className="custom-checkbox"></span>I accept the 
+          <Link to="/terms" className="terms-link">Terms and Conditions</Link></label>
           {termsError && <p className="error-message">{termsError}</p>}
-          <Button className="client-btn" type="submit">Trimite comanda</Button>
+          <Button className="client-btn" type="submit">Submit Order</Button>
       </form>
     </div>
   )

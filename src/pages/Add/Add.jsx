@@ -12,13 +12,13 @@ export default function Add({ onClose, onAdd }) {
 
   const categories = [
     "laptop",
-    "tableta",
-    "telefon",
-    "consola",
-    "accesorii",
+    "tablet",
+    "phone",
+    "console",
+    "accessories",
     "pc",
-    "periferice",
-    "componente"
+    "peripherals",
+    "components"
   ];
 
   const handleChange = (e) => {
@@ -38,10 +38,10 @@ export default function Add({ onClose, onAdd }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Adaugă produs</h2>
+        <h2>Add Product</h2>
         <form className="edit-form" onSubmit={handleSubmit}>
           <label>
-            Nume
+            Name
             <input
               type="text"
               name="name"
@@ -52,7 +52,7 @@ export default function Add({ onClose, onAdd }) {
           </label>
 
           <label>
-            Preț
+            Price
             <input
               type="number"
               name="price"
@@ -64,7 +64,7 @@ export default function Add({ onClose, onAdd }) {
           </label>
 
           <label>
-            Categorie
+            Category
             <select
               name="category"
               value={productData.category}
@@ -77,7 +77,7 @@ export default function Add({ onClose, onAdd }) {
           </label>
 
           <label>
-            Imagine (link)
+            Image URL
             <input
               type="text"
               name="image"
@@ -88,7 +88,7 @@ export default function Add({ onClose, onAdd }) {
           </label>
 
           <label>
-            Descriere
+            Description
             <textarea
               name="description"
               value={productData.description}
@@ -109,8 +109,8 @@ export default function Add({ onClose, onAdd }) {
           </label>
 
           <div className="modal-buttons">
-            <button type="submit" className="btn-save">Adaugă</button>
-            <button type="button" className="btn-cancel" onClick={onClose}>Anulează</button>
+            <button type="submit" className="btn-save">Save</button>
+            <button type="button" className="btn-cancel" onClick={onClose}>Cancel</button>
           </div>
         </form>
       </div>

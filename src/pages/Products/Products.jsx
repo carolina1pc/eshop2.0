@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import productsData from "../../../db.json";
 import ProductDetail from "./ProductDetail";
 import Edit from "../Edit/Edit";
 
-export default function ProductPage({ products }) {
+export default function ProductPage() {
   const { id } = useParams();
-  const product = productsData.products.find((p) => p.id === id);
-  const [editingProduct, setEditingProduct] = useState(null);
+  const [product, setProduct] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/products/${id}`);
+        if (!res.ok) throw new Error('Failed to load product');
+        const data = await res.json();
+        setProduct(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    load();
+  }, [id]);
 
 const handleEdit = () => {
   setEditingProduct(product);

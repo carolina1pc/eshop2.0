@@ -25,7 +25,7 @@ function Card({ product }) {
        <div className="card-price-container">
         <p className="card-price">
         {intPart}
-        <span className="price-decimals">{decimalPart}</span> lei
+        <span className="price-decimals">{decimalPart}</span> RON
         </p>
 
         <button className={`add-cart-button ${product.stock === 0 ? "disabled" : ""}`}
